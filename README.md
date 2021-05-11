@@ -20,5 +20,7 @@ Things you may want to cover:
 * Services (job queues, cache servers, search engines, etc.)
 
 * Deployment instructions
-
+* https://qiita.com/kohei_abe/items/2a900d1580a38275d924
+* https://qiita.com/junara/items/ddba402e277afd5d38b2
+* https://teratail.com/questions/55470
 * ...

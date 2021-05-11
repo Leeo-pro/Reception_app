@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  date: 2021-05-10
+  str_time: 2021-05-10 03:23:30
+  fin_time: 2021-05-10 03:23:30
+  expected: 1
+  reserved: 1
+  note: MyString
+
+two:
+  name: MyString
+  date: 2021-05-10
+  str_time: 2021-05-10 03:23:30
+  fin_time: 2021-05-10 03:23:30
+  expected: 1
+  reserved: 1
+  note: MyString
