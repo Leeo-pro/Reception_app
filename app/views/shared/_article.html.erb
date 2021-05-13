@@ -1,13 +1,19 @@
 <div class="col-md-10 col-md-offset-1">
   <table class="table table-condensed table-hover id="table-articles">
-
-<div class="artcile-box">
-  <div class="article-info">
-    <%# 登録時間を表示 %>
-    <td class="article-time"><%= l(article.created_at, format: :long) %></td>
-  </div>
-    <%# 改行が反映される形で記事を表示 %>
-    <td class="left"><%= simple_format(article.memo) %></td>
-</div>
-</table>
+    <thead>
+      <tr>
+        <th class="center">掲載日時</th>
+        <th class="center">連絡内容</th>
+      </tr>
+    </thead>
+    
+    <% #@artciles_latest3.each do |article| %>
+      <tr>
+        <td class="center"><%= l(article.created_at, format: :long) %></td>
+        <td class="center">
+          <%= simple_format(article.memo) %>
+        </td>
+      </tr>
+    <% #end %>
+    </table>
 </div>

@@ -1,10 +1,38 @@
 <% provide(:title, "INFO")%>
 <h1>関連ニュース</h1>
 
-<%= render partial: 'shared/article', collection: @artciles_latest3 %>
+<% if current_user.admin? %>
+  <%= link_to "新規登録", new_user_article_url, class: "btn btn-primary" %>
 
-
+<% end %>
 <div class="col-md-10 col-md-offset-1">
-  
+  <table class="table table-condensed table-hover id="table-articles">
+    <thead>
+      <tr>
+        <th class="center">掲載日時</th>
+        <th class="left">連絡内容</th>
+      </tr>
+    </thead>
+    
+    <% @artciles_latest3.each do |article| %>
+      <tr>
+        <td class="center"><%= l(article.created_at, format: :long) %></td>
+        <td class="left">
+          <%= simple_format(article.memo) %>
+        </td>
+        <td class="center">
+            <% if current_user.admin? %>
+                <%= link_to "編集", '#', remote: true, class: "btn btn-success" %>
+                <%= link_to "削除",  user_article_path(@user, article.id), method: :delete,
+                    data: { confirm: "削除してよろしいですか？" }, 
+                    class: "btn btn-danger" %>
+                <% end %>
+        </td>
+      </tr>
+    <% end %>
+    </table>
 </div>
+
+
+<%#= render partial: 'shared/article', collection: @artciles_latest3 %>
 

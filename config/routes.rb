@@ -5,10 +5,6 @@ Rails.application.routes.draw do
   get '/login', to:'sessions#new'
   post '/login', to:'sessions#create'
   delete '/logout', to:'sessions#destroy'
-
-  resources :reservations
-  
-  resources :articles
   
   resources :users do
     member do
@@ -18,5 +14,7 @@ Rails.application.routes.draw do
       patch 'attendances/update_one_month'
     end
     resources :attendances, only: :update
+    resources :articles
+    resources :reservations
   end
 end
