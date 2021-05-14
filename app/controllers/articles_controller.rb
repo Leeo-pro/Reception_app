@@ -5,15 +5,19 @@ class ArticlesController < ApplicationController
   
   def new
     @user = User.find(params[:user_id])
-    @article = Article.new
+    @article = Article.new(
+      user_id: @user.id
+      )
   end
   
   def create
-    @article = Article.new(article_params)
+    @user = User.find(params[:user_id])
+    @article = @user.articles.new(article_params)
     if @article.save
       flash[:success] = "関連ニュースを更新しました。"
       redirect_to user_articles_path
     else
+      flash[:danger] = "更新できませんでした。"
       render :new
     end
   end
@@ -32,9 +36,31 @@ class ArticlesController < ApplicationController
     redirect_to user_articles_url
   end
   
+  def edit_news_info
+    @user = User.find(params[:user_id])
+    @article = Article.find(params[:id])
+  end
+
+  def update_news_info
+    @user = User.find(params[:user_id])
+    @article = Article.find(params[:id])
+    @article.user_id = params[:user_id]
+    
+    if @article.update_attributes(article_params)
+      flash[:success] = "更新いたしました。"
+    else
+      flash[:danger] = "更新を中止しました。"
+    end
+    redirect_to user_articles_url
+  end
+  
   private
     def article_params
-      params.require(:article).permit(:news_id, :memo)
+      params.require(:article).permit(:memo, :user_id)
+    end
+    
+    def article_params2
+      params.require(:article).permit(:memo)
     end
     
     def set_item
