@@ -3,6 +3,8 @@ ja:
     models:
       user: ユーザー
       attendance: 勤怠
+      article: ニュース
+      reservation: 予約
     attributes:
         user:
           id: ID
@@ -21,3 +23,17 @@ ja:
           finished_at: 退勤時間
           note: 備考
           user: ユーザーID
+        article:
+          news_id: ID
+          memo: ニュース内容
+          user: ユーザーID
+        reservation:
+          name: 拠点名
+          date: 日付
+          str_time: 開始時間
+          fin_time: 終了時間
+          expected: 予約可能枠
+          reserved: 予約済枠
+          note: 備考
+
+
