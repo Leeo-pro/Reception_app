@@ -1,10 +1,15 @@
 class AttendancesController < ApplicationController
-  before_action :set_user, only: [:edit_one_month, :update_one_month]
+  before_action :set_user, only: [:edit_one_month, :update_one_month, :edit]
+  before_action :set_spot, only: [:index, :edit]
   before_action :logged_in_user, only: [:update, :edit_one_month]
   before_action :admin_or_correct_user, only: [:update, :edit_one_month, :update_one_month]
-  before_action :set_one_month, only: :edit_one_month
+  before_action :set_one_month, only: [:edit_one_month, :index]
   
   UPDATE_ERROR_MSG = "勤怠登録に失敗しました。やり直してください。"
+  
+  def edit
+   
+  end  
   
   def update
     @user = User.find(params[:user_id])

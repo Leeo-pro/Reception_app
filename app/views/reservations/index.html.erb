@@ -1,0 +1,23 @@
+<% provide(:title, 'All Spots') %>
+<h1>拠点一覧</h1>
+
+<div class="col-md-10 col-md-offset-1">
+  <%= will_paginate %>
+  <table class="table table-condensed table-hover" id="table-spots">
+    <thead>
+      <th><%= Reservation.human_attribute_name :name %></th>
+      <th class="center"><%= Reservation.human_attribute_name :reserved %></th>
+      
+    </thead>
+    
+    <% @reservations.each do |reservation| %>
+    <tr>
+      <td>
+        <%= link_to reservation.name, user_reservation_path(current_user, reservation) %>
+      </td>
+      <td class="center"><%= reservation.reserved %></td>
+    </tr>
+    <% end %>
+  </table>
+  <%= will_paginate %>
+</div>

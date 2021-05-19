@@ -1,0 +1,28 @@
+<% provide(:title, @reservation.name) %>
+
+<div class="btn-reservations-show">
+  <%= link_to "←前月へ", user_attendances_path(worked_on: @first_day.prev_month), class: "btn btn-info" %>
+  <%= link_to "次月へ→", user_attendances_path(worked_on: @first_day.next_month), class: "btn btn-info" %>
+</div>
+<div>
+  <table class="table table-bordered table-condensed table-hover" id="table-reservations">
+    <thead>
+      <tr>
+        <th>日付</th>
+        <th>曜日</th>
+        
+        <th>営業切替</th>
+        <th>備考</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @attendances.each do |day| %>
+          <td><%= link_to l(day.worked_on, format: :short), user_attendance_path(@user.id, @reservation.id, day.id) %></td>
+          <td><%= $days_of_the_week[day.worked_on.wday] %></td>
+          <td><%= link_to "登録", "#", method: :patch, class: "btn btn-primary btn-reservation" %></td>
+          <td><%= day.note %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

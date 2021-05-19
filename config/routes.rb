@@ -13,13 +13,16 @@ Rails.application.routes.draw do
       get 'attendances/edit_one_month'
       patch 'attendances/update_one_month'
     end
-    resources :attendances, only: :update
     resources :articles do
       member do
         get 'edit_news_info'
         patch 'update_news_info'
       end
     end
-    resources :reservations
+    resources :reservations do
+      member do
+        resources :attendances, param: :date
+      end
+    end
   end
 end
