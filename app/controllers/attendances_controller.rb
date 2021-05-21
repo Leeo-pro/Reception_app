@@ -12,23 +12,20 @@ class AttendancesController < ApplicationController
     @reservation = Reservation.find(params[:id])
   end  
   
-  def update
+  def new
+    @attendance = Attendance.new
     @user = User.find(params[:user_id])
-    @attendance = Attendance.find(params[:id])
-    if @attendance.started_at.nil?
-      if @attendance.update_attributes(started_at: Time.current.change(sec: 0))
-        flash[:info] = "おはようございます！"
-      else
-        flash[:danger] = UPDATE_ERROR_MSG
-      end
-    elsif @attendance.finished_at.nil?
-      if @attendance.update_attributes(finished_at: Time.current.change(sec: 0))
-        flash[:info] = "お疲れ様でした。"
-      else
-        flash[:danger] = UPDATE_ERROR_MSG
-      end
+    @reservation = Reservation.find(params[:id])
+  end
+  
+  def create
+    @attendance = Attendance.new(attendance_params)
+    @user = User.find(params[:user_id])
+    @reservation = Reservation.find(params[:id])
+
+    if @attendance.save
+      flash[:success] = "予約が完了いたしました。"
     end
-    redirect_to @user
   end
   
   def edit_one_month
@@ -51,7 +48,7 @@ class AttendancesController < ApplicationController
   private
   
     def attendances_params
-      params.require(:user).permit(attendances: [:started_at, :finished_at, :note])[:attendances]
+      params.require(:attendance).permit(:worked_on, :started_at, :name, :tel, :note)
     end
     
     def admin_or_correct_user
