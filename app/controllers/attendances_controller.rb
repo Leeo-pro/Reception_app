@@ -6,6 +6,11 @@ class AttendancesController < ApplicationController
   before_action :set_one_month, only: [:edit_one_month, :index]
   
   UPDATE_ERROR_MSG = "勤怠登録に失敗しました。やり直してください。"
+  def index
+    @user = User.find(params[:user_id])
+    @reservation = Reservation.find(params[:id])
+    redirect_to user_reservation_path(@user, @reservation)
+  end
   
   def edit
     @attendance = Attendance.new
@@ -20,11 +25,25 @@ class AttendancesController < ApplicationController
   
   def create
     @attendance = Attendance.new(attendance_params)
+    @YEAR = params[:attendance][:worked_on].to_date.year
+    @MONTH = params[:attendance][:worked_on].to_date.month
+    @DAY = params[:attendance][:worked_on].to_date.day
+    @HOUR = params[:attendance]['started_at(4i)'].to_i
+    @MIN = params[:attendance]['started_at(5i)'].to_i
+    @attendance.started_at = DateTime.new(@YEAR, @MONTH, @DAY, @HOUR, @MIN, 0).strftime("%H:%M")
+    
     @user = User.find(params[:user_id])
     @reservation = Reservation.find(params[:id])
 
-    if @attendance.save
+    if @attendance.name.blank?
+      flash[:danger] = "更新できませんでした"
+      render :new
+    elsif @attendance.save
       flash[:success] = "予約が完了いたしました。"
+      redirect_to user_reservation_path(@user, @reservation)
+    else
+      flash[:danger] = "更新できませんでした"
+      render :new
     end
   end
   
@@ -44,11 +63,11 @@ class AttendancesController < ApplicationController
     flash[:danger] = "無効な入力データがあった為、更新をキャンセルしました。"
     redirect_to attendances_edit_one_month_user_url(date: params[:date])
   end
-  
+
   private
   
-    def attendances_params
-      params.require(:attendance).permit(:worked_on, :started_at, :name, :tel, :note)
+    def attendance_params
+      params.require(:attendance).permit(:worked_on, :started_at, :name, :tel, :note, :user_id, :reservation_id)
     end
     
     def admin_or_correct_user

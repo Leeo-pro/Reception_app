@@ -16,11 +16,11 @@
       </tr>
     </thead>
     <tbody>
-      <% @attendances.each do |day| %>
+      <% @attendances.select(:worked_on).distinct.each do |day| %>
           <td><%= link_to l(day.worked_on, format: :short), new_user_attendance_path(params[:user_id], params[:id], day.worked_on) %></td>
           <td><%= $days_of_the_week[day.worked_on.wday] %></td>
           <td><%= link_to "登録", "#", method: :patch, class: "btn btn-primary btn-reservation" %></td>
-          <td><%= day.note %></td>
+          <td><%#= day.note %></td>
         </tr>
       <% end %>
     </tbody>
