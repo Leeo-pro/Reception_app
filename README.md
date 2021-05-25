@@ -13,7 +13,7 @@ Things you may want to cover:
 
 * Database creation
 
-* Database initialization
+* Database initialization 検索/個別登録/一括登録/API/
 
 * How to run the test suite
 

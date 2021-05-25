@@ -21,7 +21,12 @@ Rails.application.routes.draw do
     end
     resources :reservations do
       member do
+        resources :attendances do
+          get 'edit_order_info'
+          patch 'update_order_info'
         resources :attendances, param: :date
+
+        end
       end
     end
   end

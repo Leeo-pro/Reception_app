@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210521100007) do
+ActiveRecord::Schema.define(version: 20210525011641) do
 
   create_table "articles", force: :cascade do |t|
     t.integer "news_id"
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 20210521100007) do
     t.integer "reservation_id"
     t.string "name"
     t.string "tel"
+    t.string "build_name"
     t.index ["reservation_id"], name: "index_attendances_on_reservation_id"
     t.index ["user_id"], name: "index_attendances_on_user_id"
   end

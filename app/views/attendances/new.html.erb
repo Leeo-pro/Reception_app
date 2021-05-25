@@ -4,7 +4,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-5 col-md-offset-3">
-      <%= "物件名：#{@reservation.name}" %>
+      <p><%= "物件名：#{@reservation.name}" %></p>
       <%= form_with(model: @attendance, url: user_attendances_path(@user,@reservation), local: true) do |f| %>
       <%= render 'shared/error_messages', object: @attendance %>
         
@@ -12,10 +12,13 @@
           <div class="form-group">
             <%= f.label :worked_on, class: "label-new-appointment" %>
             <%= f.text_field :worked_on, disabled: true, value: params[:format], class: "form-control" %>
+          </div>
+
             <%= f.hidden_field :worked_on, value: params[:format] %>
             <%= f.hidden_field :reservation_id, value: params[:id] %>
             <%= f.hidden_field :user_id, value: params[:user_id] %>
-          </div>
+            <%= f.hidden_field :build_name, value: @reservation.name %>
+
           
           <div class="form-group">
             <%= f.label :started_at %>
@@ -44,7 +47,6 @@
     </div>
   </div>
 </div>
-
 <h1>ご予約済一覧</h1>
 <div class="col-md-10 col-md-offset-1">
   <table class="table table-bordered table-condensed table-hover" id="table-reservations">
@@ -55,18 +57,26 @@
         <th>名前</th>
         <th>電話番号</th>
         <th>備考</th>
+        <th></th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
-      <% @seated = Attendance.where(worked_on: params[:format]).where.not(note: nil) %>
+      <% @seated = Attendance.where(worked_on: params[:format], build_name: @reservation.name).where.not(note: nil).order(:started_at) %>
       <% @seated.each do |list| %>
           <td><%= l(list.worked_on, format: :short) %></td>
           <td><%= l(list.started_at, format: :time) %></td>
           <td><%= list.name %></td>
           <td><%= list.tel %></td>
           <td><%= list.note %></td>
+          <td class="center"><%= link_to "編集", user_attendance_edit_order_info_path(@user, @reservation, list.id), remote: true, class: "btn btn-success" %></td>
+          <td class="center"><%= link_to "削除", user_attendance_path(@user, @reservation, list.id), method: :delete,
+                                 data: { confirm: "削除してよろしいですか？" }, class: "btn btn-danger" %>
+          </td>
         </tr>
       <% end %>
     </tbody>
   </table>
 </div>
+
+<div id="edit-order-info" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>

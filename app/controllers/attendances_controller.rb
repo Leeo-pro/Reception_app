@@ -36,8 +36,11 @@ class AttendancesController < ApplicationController
     @reservation = Reservation.find(params[:id])
 
     if @attendance.name.blank?
-      flash[:danger] = "更新できませんでした"
-      render :new
+      flash[:danger] = "必須項目が入力されていません。"
+      redirect_to new_user_attendance_path(@user, @reservation, @attendance.worked_on)
+    elsif Attendance.where(started_at: @attendance.started_at).count >= 1
+      flash[:danger] = "既に予約済です。"
+      redirect_to new_user_attendance_path(@user, @reservation, @attendance.worked_on)
     elsif @attendance.save
       flash[:success] = "予約が完了いたしました。"
       redirect_to user_reservation_path(@user, @reservation)
@@ -64,10 +67,37 @@ class AttendancesController < ApplicationController
     redirect_to attendances_edit_one_month_user_url(date: params[:date])
   end
 
+  def destroy
+    @user = User.find(params[:user_id])
+    @attendance = Attendance.find(params[:id])
+    @reservation = Reservation.find(@attendance.reservation_id)
+    @attendance.destroy
+    flash[:success] = "#{@attendance.build_name}の予約情報を削除しました。"
+    redirect_to user_reservation_path(@user, @reservation)
+  end
+  
+  def edit_order_info
+    @user = User.find(params[:user_id])
+    @reservation = Reservation.find(params[:id])
+    @attendance = Attendance.find(params[:attendance_id])
+  end
+
+  def update_order_info
+    @user = User.find(params[:user_id])
+    @reservation = Reservation.find(params[:id])
+    @attendance = Attendance.find(params[:attendance_id])
+    if @attendance.update_attributes(attendance_params)
+      flash[:success] = "#{@attendance.build_name}の予約情報を更新しました。"
+    else
+      flash[:danger] = "#{@attendance.build_name}の更新は失敗しました。<br>" + @attendance.errors.full_messages.join("<br>")
+    end
+    redirect_to user_reservation_path(@user, @reservation)
+  end
+
   private
   
     def attendance_params
-      params.require(:attendance).permit(:worked_on, :started_at, :name, :tel, :note, :user_id, :reservation_id)
+      params.require(:attendance).permit(:worked_on, :started_at, :name, :tel, :note, :user_id, :build_name, :reservation_id)
     end
     
     def admin_or_correct_user

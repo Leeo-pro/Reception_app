@@ -5,7 +5,17 @@ class ReservationsController < ApplicationController
   
   
   def index
-    @reservations = Reservation.paginate(page: params[:page])
+    @user = User.find(params[:user_id])
+    @reservations = Reservation.paginate(page: params[:page]).search(params[:search])
+    #@reservations = @reservations.where('name LIKE ?',  "%#{params[:search]}%") if params[:search].present?
+    
+    #@reservations = Reservation.all
+
+    #@reservations = Reservation.where('title LIKE ?', "%#{params[:search]}%") if params[:search].present?
+  end
+  
+  def search
+    @reservations = Reservation.search(params[:search])
   end
   
   def show
