@@ -22,7 +22,8 @@
   <table class="table table-condensed table-hover" id="table-spots">
     <thead>
       <th><%= Reservation.human_attribute_name :name %></th>
-      <th class="center"><%= Reservation.human_attribute_name :reserved %></th>
+      <th></th>
+      <th></th>
       
     </thead>
     
@@ -31,9 +32,17 @@
       <td>
         <%= link_to reservation.name, user_reservation_path(current_user, reservation) %>
       </td>
-      <td class="center"><%= reservation.reserved %></td>
+      <% if current_user.admin? %>
+        <td class="center"><%= link_to "編集", edit_area_info_user_reservation_path(@user, reservation), remote: true, class: "btn btn-success" %></td>
+        <td class="center"><%= link_to "削除", user_reservation_path(@user, reservation), method: :delete,
+                               data: { confirm: "削除してよろしいですか？" }, class: "btn btn-danger" %>
+        </td>
+      <% else %>
+      <% end %>
     </tr>
     <% end %>
   </table>
   <%= will_paginate %>
 </div>
+
+<div id="edit-area-info" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>

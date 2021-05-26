@@ -25,6 +25,7 @@ ja:
           user: ユーザーID
           name: 名前
           tel: 電話番号
+          build_name: 拠点名
         article:
           news_id: ID
           memo: ニュース内容
@@ -37,5 +38,7 @@ ja:
           expected: 予約可能枠
           reserved: 予約済枠
           note: 備考
+          day: 受付日
+          close: 臨時閉館フラグ
 
 

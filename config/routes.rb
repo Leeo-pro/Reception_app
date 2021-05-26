@@ -21,6 +21,11 @@ Rails.application.routes.draw do
     end
     resources :reservations do
       member do
+          get 'edit_area_info'
+          patch 'update_area_info'
+          patch 'close_info'
+      end
+      member do
         resources :attendances do
           get 'edit_order_info'
           patch 'update_order_info'

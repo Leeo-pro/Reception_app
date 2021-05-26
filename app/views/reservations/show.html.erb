@@ -10,17 +10,20 @@
       <tr>
         <th>日付</th>
         <th>曜日</th>
-        
-        <th>営業切替</th>
-        <th>備考</th>
+        <th>予約件数</th>
       </tr>
     </thead>
     <tbody>
       <% @attendances.select(:worked_on).distinct.each do |day| %>
+        <tr>
+        <% if @reservation.day.include?($days_of_the_week[day.worked_on.wday]) %>
           <td><%= link_to l(day.worked_on, format: :short), new_user_attendance_path(params[:user_id], params[:id], day.worked_on) %></td>
+        <% else %>
+          <td class="p-3 mb-2 bg-danger text-white"><%= l(day.worked_on, format: :short) %></td>
+        <% end %>
           <td><%= $days_of_the_week[day.worked_on.wday] %></td>
-          <td><%= link_to "登録", "#", method: :patch, class: "btn btn-primary btn-reservation" %></td>
-          <td><%#= day.note %></td>
+          <%#= link_to "登録", close_info_user_reservation_path(@user, @reservation), method: :patch, class: "btn btn-primary btn-reservation" do %>
+          <td><%= "#{Attendance.where(worked_on: day.worked_on).where.not(name: nil).where(build_name: @reservation.name).count}件" %></td>
         </tr>
       <% end %>
     </tbody>
