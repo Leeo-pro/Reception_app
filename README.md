@@ -13,7 +13,7 @@ Things you may want to cover:
 
 * Database creation/https://qiita.com/kazuooooo/items/47e7d426cbb33355590e
 
-* Database initialization 検索/個別登録/一括登録/API/https://qiita.com/akioneway94/items/35641ad30c2acb23b562
+* Database initialization /一括登録/API/https://qiita.com/akioneway94/items/35641ad30c2acb23b562
 
 * How to run the test suite
 
