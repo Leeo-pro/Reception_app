@@ -19,7 +19,8 @@
       <%= f.submit "ログイン", class: "btn btn-primary btn-block btn-login" %>
     <% end %>
     <p>
-      ユーザー登録がまだの場合は<%= link_to "こちら", signup_path %>
+      ユーザー登録がまだの場合は<%= link_to "こちら", signup_path %><br>
+      <%= link_to 'Googleログイン', user_google_oauth2_omniauth_authorize_path, method: :post %>
     </p>
   </div>
 </div>

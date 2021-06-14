@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210526115014) do
+ActiveRecord::Schema.define(version: 20210604104804) do
 
   create_table "articles", force: :cascade do |t|
     t.integer "news_id"
@@ -51,17 +51,31 @@ ActiveRecord::Schema.define(version: 20210526115014) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "name"
-    t.string "email"
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "password_digest"
     t.string "remember_digest"
     t.boolean "admin", default: false
     t.string "department"
-    t.datetime "basic_time", default: "2021-05-07 00:00:00"
-    t.datetime "work_time", default: "2021-05-07 08:00:00"
+    t.datetime "basic_time", default: "2021-06-04 00:00:00"
+    t.datetime "work_time", default: "2021-06-04 08:00:00"
+    t.string "meta"
+    t.string "uid"
+    t.string "provider"
+    t.string "image"
+    t.string "name"
+    t.string "affiliation"
+    t.integer "employee_number"
+    t.boolean "superior", default: false
+    t.datetime "designated_work_start_time"
+    t.datetime "designated_work_end_time"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
 end
