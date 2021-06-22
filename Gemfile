@@ -17,7 +17,7 @@ gem 'jbuilder',     '~> 2.5'
 gem 'devise'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
-gem 'dotenv-rails'
+gem 'dotenv-rails', require: 'dotenv/rails-now'
 gem 'omniauth-rails_csrf_protection'
 
 group :development, :test do

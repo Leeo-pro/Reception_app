@@ -22,3 +22,7 @@ https://teratail.com/questions/60542
 
 ■　デバイスの実装
 https://qiita.com/mmmasuke/items/7d5c47b4a40f6912adf2
+
+■認証不一致
+https://ja.stackoverflow.com/questions/30172/%E6%9D%A1%E4%BB%B6%E5%88%86%E5%B2%90%E4%B8%AD%E3%81%AEpersisted%E3%82%92true%E3%81%AB%E3%81%A7%E3%81%8D%E3%81%AA%E3%81%84
+https://teratail.com/questions/54276

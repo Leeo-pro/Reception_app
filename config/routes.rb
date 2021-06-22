@@ -1,7 +1,14 @@
 Rails.application.routes.draw do
   
-  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
-  root 'sessions#new'
+  devise_for :users, controllers: {
+    omniauth_callbacks: 'users/omniauth_callbacks'
+  }
+  devise_scope :user do
+    root to:'devise/sessions#new'
+  end  
+  
+  #root 'sessions#new'
+  root 'devise/sessions#new'
   get '/signup', to: 'users#new'
   
   get '/login', to:'sessions#new'
