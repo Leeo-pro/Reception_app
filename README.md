@@ -24,5 +24,23 @@ https://teratail.com/questions/60542
 https://qiita.com/mmmasuke/items/7d5c47b4a40f6912adf2
 
 ■認証不一致
-https://ja.stackoverflow.com/questions/30172/%E6%9D%A1%E4%BB%B6%E5%88%86%E5%B2%90%E4%B8%AD%E3%81%AEpersisted%E3%82%92true%E3%81%AB%E3%81%A7%E3%81%8D%E3%81%AA%E3%81%84
+◎　https://ja.stackoverflow.com/questions/30172/%E6%9D%A1%E4%BB%B6%E5%88%86%E5%B2%90%E4%B8%AD%E3%81%AEpersisted%E3%82%92true%E3%81%AB%E3%81%A7%E3%81%8D%E3%81%AA%E3%81%84
 https://teratail.com/questions/54276
+
+■参考記事
+https://qiita.com/d0ne1s/items/e1ee23ea23343d6aaa34#devise%E3%82%92%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB
+▲　https://qiita.com/zizynonno/items/7eabb61cb1c3fcbc258a
+▲　https://qiita.com/manbolila/items/48d361fd5968179918c3
+https://freesworder.net/rails-twitter/
+
+■Deviseモジュールについて解説あり
+https://qiita.com/cigalecigales/items/f4274088f20832252374
+
+■Devise無しで実装か
+https://zenn.dev/batacon/articles/e9b4a88ede2889
+■Deviseヘルパー
+https://zenn.dev/kitabatake/articles/start-to-like-the-devise
+■Deviseログイン状態維持できない問題
+https://qiita.com/params_bird/items/6b0b4684b27fb41461aa
+■Omniauthを理解する
+https://qiita.com/yoshi_4/items/580374b30242a265ec22

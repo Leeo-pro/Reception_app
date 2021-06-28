@@ -6,9 +6,10 @@ Rails.application.routes.draw do
   devise_scope :user do
     root to:'devise/sessions#new'
   end  
+    
   
   #root 'sessions#new'
-  root 'devise/sessions#new'
+  #root 'devise/sessions#new'
   get '/signup', to: 'users#new'
   
   get '/login', to:'sessions#new'

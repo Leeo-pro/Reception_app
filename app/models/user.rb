@@ -2,13 +2,15 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, :omniauthable
+         :recoverable, :rememberable, :validatable,
+         :omniauthable, omniauth_providers: %i[google_oauth2]
+  
          
   has_many :articles
   attr_accessor :remember_token
   before_save { self.email = email.downcase }
   
-  validates :name, presence: true, length: { maximum: 100 }
+  #validates :name, presence: true, length: { maximum: 100 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, length: { maximum: 30 },
                     format: { with: VALID_EMAIL_REGEX },
@@ -50,17 +52,11 @@ class User < ApplicationRecord
          
 
   def self.from_omniauth(auth)
+    where(provider: auth.provider, uid: auth.uid).first_or_create! do |user|
+      user.email = auth.info.email
+      user.password = Devise.friendly_token[0,20]
+    end
     
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.provider = auth.provider
-      user.uid = auth.uid
-      user.name = auth.info.name
-      user.email = User.dummy_email(auth)
-      user.password = Devise.friendly_token[0, 20]
-      user.image = auth.info.image.gsub("_normal","") if user.provider == "twitter"
-      user.image = auth.info.image.gsub("picture","picture?type=large") if user.provider == "facebook"
-      user.image = auth.info.image if user.provider == "google_oauth2"
-    end 
   end
 
   private

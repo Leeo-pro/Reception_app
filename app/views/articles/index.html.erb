@@ -2,7 +2,8 @@
 <h1>関連ニュース</h1>
 
 <div class="btn-articles-new">
-<% if current_user.admin? %>
+
+<% if user_signed_in? && current_user.admin? %>
   <%= link_to "新規登録", new_user_article_url, class: "btn btn-primary" %>
 <% end %>
 </div>
@@ -23,7 +24,7 @@
           <%= simple_format(article.memo) %>
         </td>
         <td class="center">
-            <% if current_user.admin? %>
+            <% if user_signed_in? && current_user.admin? %>
                 <%= link_to "編集", edit_news_info_user_article_path(@user, article.id), remote: true, class: "btn btn-success" %>
                 <%= link_to "削除",  user_article_path(@user, article.id), method: :delete,
                     data: { confirm: "削除してよろしいですか？" }, 

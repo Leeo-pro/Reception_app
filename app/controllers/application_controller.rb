@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :authenticate_user! # 追記 (userの部分はmodel名)
+  before_action :configure_permitted_parameters, if: :devise_controller?
   
   include SessionsHelper
 
@@ -56,5 +57,22 @@ class ApplicationController < ActionController::Base
   rescue ActiveRecord::RecordInvalid # トランザクションによるエラーの分岐です。
     flash[:danger] = "ページ情報の取得に失敗しました、再アクセスしてください。"
     redirect_to root_url
+  end
+  
+  def after_sign_in_path_for(resource)
+    user_articles_path(1)
+    #case resource
+    #when Admin
+    #  admin_top_path          #pathは設定したい遷移先へのpathを指定してください
+    #when Customer
+    #  root_path              #ここもpathはご自由に変更してください
+    #end
+  end
+  
+  
+  private
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_in, keys: [:user_id])
   end
 end

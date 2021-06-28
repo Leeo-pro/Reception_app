@@ -249,7 +249,7 @@ Devise.setup do |config|
   # Configure the default scope given to Warden. By default it's the first
   # devise role declared in your routes (usually :user).
   # config.default_scope = :user
-  config.omniauth :google_oauth2, ENV['GOOGLE_APP_ID'], ENV['GOOGLE_APP_SECRET']
+  config.omniauth :google_oauth2,ENV['GOOGLE_APP_ID'],ENV['GOOGLE_APP_SECRET'],scope: 'email',redirect_uri: "https://5eca58f964bd46bd9b98440fd494ce0a.vfs.cloud9.ap-northeast-1.amazonaws.com/users/auth/google_oauth2/callback"
 
   # Set this configuration to false if you want /users/sign_out to sign out
   # only the current scope. By default, Devise signs out all scopes.
