@@ -36,7 +36,10 @@ class AttendancesController < ApplicationController
     @reservation = Reservation.find(params[:id])
 
     if @attendance.name.blank?
-      flash[:danger] = "必須項目が入力されていません。"
+      flash[:danger] = "名前が入力されていません。"
+      redirect_to new_user_attendance_path(@user, @reservation, @attendance.worked_on)
+    elsif @HOUR == 0
+      flash[:danger] = "予約時間が入力されていません。"
       redirect_to new_user_attendance_path(@user, @reservation, @attendance.worked_on)
     elsif Attendance.where(started_at: @attendance.started_at).count >= 1
       flash[:danger] = "既に予約済です。"

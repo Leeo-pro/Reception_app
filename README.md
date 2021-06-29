@@ -44,3 +44,6 @@ https://zenn.dev/kitabatake/articles/start-to-like-the-devise
 https://qiita.com/params_bird/items/6b0b4684b27fb41461aa
 ■Omniauthを理解する
 https://qiita.com/yoshi_4/items/580374b30242a265ec22
+
+time_select構文
+https://hellhellmymy.hatenablog.com/entry/2019/09/29/223203
