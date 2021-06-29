@@ -19,7 +19,7 @@
             <p><%= @attendance.worked_on %></p>
             
             <%= f.label :started_at, class: "label-#{yield(:class_text)}" %>
-            <%= f.time_field :started_at, class: "form-control" %>
+            <%= f.time_select :started_at, { include_blank: true, minute_step: 30, start_hour: @reservation.str_time.hour, end_hour: @reservation.fin_time.hour-1}, class: "form-control" %>
             
             <%= f.label :name, class: "label-#{yield(:class_text)}" %>
             <%= f.text_field :name, class: "form-control" %>
