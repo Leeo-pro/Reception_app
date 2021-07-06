@@ -59,8 +59,8 @@ ActiveRecord::Schema.define(version: 20210614074908) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "department"
-    t.datetime "basic_time", default: "2021-06-23 00:00:00"
-    t.datetime "work_time", default: "2021-06-23 08:00:00"
+    t.datetime "basic_time", default: "2021-07-05 00:00:00"
+    t.datetime "work_time", default: "2021-07-05 08:00:00"
     t.string "meta"
     t.string "uid"
     t.string "provider"
