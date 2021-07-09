@@ -64,7 +64,7 @@ Excelのファイルにて予約を管理していたため、
 全オペレーターへ徹底することが難しい。
 
 
-本アプリを導入することで期待される効果
+本アプリを導入することで期待される効果!
 １．電話応対しながら予約を確定することができ、後処理が減る。
 　　また、お客様へ即答できることで満足度が得られる。
 
@@ -74,3 +74,6 @@ Excelのファイルにて予約を管理していたため、
 ■参考記事
 　　https://qiita.com/yasu-canes07/items/95bfdd50009ea2a39879
 　　https://teratail.com/questions/255116
+　　
+　　Heroku URL 
+　　https://desolate-peak-86688.herokuapp.com/ 
