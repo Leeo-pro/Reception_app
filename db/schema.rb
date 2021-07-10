@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210604104804) do
+ActiveRecord::Schema.define(version: 20210710075949) do
 
   create_table "articles", force: :cascade do |t|
     t.integer "news_id"
@@ -72,7 +72,6 @@ ActiveRecord::Schema.define(version: 20210604104804) do
     t.boolean "superior", default: false
     t.datetime "designated_work_start_time"
     t.datetime "designated_work_end_time"
-    t.string "password_digest"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
