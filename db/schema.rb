@@ -59,8 +59,8 @@ ActiveRecord::Schema.define(version: 20210604104804) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "department"
-    t.datetime "basic_time", default: "2021-07-05 00:00:00"
-    t.datetime "work_time", default: "2021-07-05 08:00:00"
+    t.datetime "basic_time", default: "2021-07-14 00:00:00"
+    t.datetime "work_time", default: "2021-07-14 08:00:00"
     t.string "meta"
     t.string "uid"
     t.string "provider"
@@ -72,7 +72,6 @@ ActiveRecord::Schema.define(version: 20210604104804) do
     t.boolean "superior", default: false
     t.datetime "designated_work_start_time"
     t.datetime "designated_work_end_time"
-    t.string "password_digest"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
