@@ -76,4 +76,4 @@ Excelのファイルにて予約を管理していたため、
 　　https://teratail.com/questions/255116
 　　
 　　Heroku URL 
-　　https://quiet-retreat-17490.herokuapp.com/ 
+　 
