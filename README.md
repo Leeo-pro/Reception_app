@@ -85,3 +85,7 @@ Excelファイルにて予約内容を管理していたため、誰かが開け
 　　
 　　Heroku URL 
 　 https://fatidique-saucisson-10499.herokuapp.com/
+　 
+　 
+■実現したい形
+https://qiita.com/sssssatou/items/2e6606e3ddf9b246a0fb
