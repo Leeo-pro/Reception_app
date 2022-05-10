@@ -1,26 +1,53 @@
-<h2>ログイン</h2>
+<div class="box">
+  <div class="box-inner">
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <h1>ログイン</h1>
+      <div class="box-email">
+        <%= f.label :email, "Eメール" %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      </div>
+      <div class="box-password">
+        <div class="a-row">
+          <div class="column-left">
+            <%= f.label :password, "パスワード" %>
+          </div>
+          <div class="column-right">
+            <%= link_to "パスワードを忘れた場合", new_user_password_path %>
+          </div>
+        </div>
+        <%= f.password_field :password, autocomplete: "current-password" %>
+      </div>
+      <div class="box-login">
+        <%= f.submit "ログイン" %>
+        <div class="legal-text">
+          続行することで、当サイトの
+          <%= link_to "利用規約", "#" %>
+          および
+          <%= link_to "プライバシー規約", "#" %>
+          に同意するものとみなされます。
+        </div>
+        <% if devise_mapping.rememberable? %>
+          <div class="remember">
+            <%= f.check_box :remember_me %>
+            <%= f.label :remember, "ログインしたままにする" %>
+          </div>
+        <% end %>
+      </div>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+      <div class="box-Googlelogin">
+        <p><span>-------</span> 既にアカウントをお持ちの方はこちら <span>-------</span></p>
+        <%- if devise_mapping.omniauthable? %>
+          <%- resource_class.omniauth_providers.each do |provider| %>
+            <%= link_to "Googleでログイン", omniauth_authorize_path(resource_name, provider), method: :post %>
+          <% end %>
+        <% end %>
+      </div>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
+    <% end %>
 
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label "パスワードを記憶する" %>
+    <div class="box-newusr">
+      <br /><p><span>-------</span> アカウントをお持ちでない方はこちら <span>-------</span></p>
+      <%= link_to "アカウントを作成", new_user_registration_path %>
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit "ログイン" %>
   </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>

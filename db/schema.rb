@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210604104804) do
+ActiveRecord::Schema.define(version: 20220510125539) do
 
   create_table "articles", force: :cascade do |t|
     t.integer "news_id"
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 20210604104804) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
+    t.string "category"
   end
 
   create_table "attendances", force: :cascade do |t|
@@ -34,6 +35,12 @@ ActiveRecord::Schema.define(version: 20210604104804) do
     t.string "build_name"
     t.index ["reservation_id"], name: "index_attendances_on_reservation_id"
     t.index ["user_id"], name: "index_attendances_on_user_id"
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "reservations", force: :cascade do |t|
@@ -59,8 +66,8 @@ ActiveRecord::Schema.define(version: 20210604104804) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "department"
-    t.datetime "basic_time", default: "2021-07-14 00:00:00"
-    t.datetime "work_time", default: "2021-07-14 08:00:00"
+    t.datetime "basic_time", default: "2022-05-10 00:00:00"
+    t.datetime "work_time", default: "2022-05-10 08:00:00"
     t.string "meta"
     t.string "uid"
     t.string "provider"

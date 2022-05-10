@@ -2,12 +2,46 @@
 <h1>関連ニュース</h1>
 
 <div class="btn-articles-new">
-
-<% if user_signed_in? && current_user.admin? %>
-  <%= link_to "新規登録", new_user_article_url, class: "btn btn-primary" %>
-<% end %>
+  <% if user_signed_in? && current_user.admin? %>
+    <%= link_to "新規登録", new_user_article_url, class: "btn btn-primary" %>
+  <% end %>
 </div>
 
+<body>
+  <div class="wrapper">
+    <ul class="tab">
+      <li><a href="#dog">拠点情報</a></li>
+      <li><a href="#cat">リーダー引継ぎ</a></li>
+      <li><a href="#bear"><%= Category.find(1).name %></a></li>
+    </ul>
+
+      <div id="dog" class="area">
+        <h2>拠点情報</h2>
+        <ul>
+          <% @articles.each do |t| %>
+            <% if t.news_id == "拠点情報" %> 
+              <div class="tweet">
+                <li><%= t.body %><br><%= t.created_at %></li>
+              </div>
+            <% end %>
+          <% end %>
+        </ul>
+      </div>
+
+      <div id="cat" class="area">
+        <h2>リーダー引継ぎ</h2>
+        <ul>
+          <% @articles.each do |t| %>
+            <% if t.news_id == "リーダー引継ぎ" %> 
+              <div class="tweet">
+                <li><%= t.body %><br><%= t.created_at %></li>
+              </div>
+            <% end %>
+          <% end %>
+        </ul>
+      </div>
+      <div id="bear" class="area">
+        
 <div class="col-md-10 col-md-offset-1">
   <table class="table table-condensed table-hover id="table-articles">
     <thead>
@@ -35,6 +69,53 @@
     <% end %>
     </table>
 </div>
+
+        <ul>
+          <% @articles.each do |t| %>
+            <% if t.news_id == "営業周知" %> 
+              <div class="tweet">
+                <li><%= t.body %><br><%= t.created_at %></li>
+              </div>
+            <% end %>
+          <% end %>
+        </ul>
+      </div>
+  </div>
+</body>
+
+
+<script>
+  function GethashID (hashIDName){
+    if(hashIDName){
+      $('.tab li').find('a').each(function() {
+        var idName = $(this).attr('href');
+        if(idName == hashIDName){ 
+          var parentElm = $(this).parent();
+          $('.tab li').removeClass("active");
+          $(parentElm).addClass("active");
+          $(".area").removeClass("is-active");
+          $(hashIDName).addClass("is-active"); 
+        }
+      });
+    }
+  }
+
+  $('.tab a').on('click', function() {
+    var idName = $(this).attr('href');
+    GethashID (idName);
+    return false;
+  });
+
+  $(window).on('load', function () {
+      $('.tab li:first-of-type').addClass("active");
+      $('.area:first-of-type').addClass("is-active");
+    var hashName = location.hash;
+    GethashID (hashName);
+  });
+</script>
+
+
+
 
 <div id="edit-news-info" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
 

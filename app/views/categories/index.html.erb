@@ -1,0 +1,29 @@
+<% provide(:title, 'All Spots') %>
+
+<div class="col-md-10 col-md-offset-1">
+  <table class="table table-condensed table-hover" id="table-spots">
+    <thead>
+      <th><%= Reservation.human_attribute_name :name %></th>
+      <th></th>
+      <th></th>
+      
+    </thead>
+    
+    <% @categories.each do |category| %>
+    <tr>
+      <td>
+        <%= category.name %>
+      </td>
+      <% if current_user.admin? %>
+        <td class="center"><%= link_to "編集", category_path(category), remote: true, class: "btn btn-success" %></td>
+        <td class="center"><%= link_to "削除", category_path(category), method: :delete,
+                               data: { confirm: "削除してよろしいですか？" }, class: "btn btn-danger" %>
+        </td>
+      <% else %>
+      <% end %>
+    </tr>
+    <% end %>
+  </table>
+</div>
+
+<div id="edit-area-info" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>

@@ -4,6 +4,7 @@ class ArticlesController < ApplicationController
   #before_action :set_user, only: [:index]
   
   def new
+    @categories = Category.all
     @user = User.find(params[:user_id])
     @article = Article.new(
       user_id: @user.id
@@ -24,6 +25,7 @@ class ArticlesController < ApplicationController
   
   def index
     @user = User.find(params[:user_id])
+    @articles = Article.all
     @article = Article.new
     @artciles_latest3 = Article.order(created_at: :desc).limit(4)
     @articles_offset3 = Article.offset(9)
